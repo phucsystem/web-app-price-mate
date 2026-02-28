@@ -11,7 +11,7 @@
 - Serve as a public deals discovery platform for organic growth
 
 **Tech Stack:**
-- Backend: .NET Core 8 Web API (C#)
+- Backend: .NET 10 Web API (LTS) (C#)
 - Frontend: Next.js (React, TypeScript)
 - Database: PostgreSQL
 - Infrastructure: AWS CDK (TypeScript)
@@ -100,7 +100,7 @@ Category (1) ──< Product (N)
 
 | ID | Decision | Chosen | Rationale |
 |----|----------|--------|-----------|
-| D-01 | Backend framework | .NET Core 8 Web API | User learning goal; mature, performant |
+| D-01 | Backend framework | .NET 10 Web API (LTS) | User learning goal; mature, performant |
 | D-02 | Frontend framework | Next.js + Tamagui (React/TS) | SSR for SEO; Tamagui for universal styling, optimized CSS output, design token system |
 | D-03 | Database | PostgreSQL | Time-series price data; robust querying |
 | D-04 | Infrastructure | AWS CDK (TypeScript) | IaC; user preference |

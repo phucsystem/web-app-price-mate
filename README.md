@@ -4,7 +4,7 @@ Track Amazon AU product prices, view price history, and get alerts when prices d
 
 ## Tech Stack
 
-- **Backend:** .NET Core 8 Web API (C#)
+- **Backend:** .NET 10 Web API (C#, LTS)
 - **Frontend:** Next.js + Tamagui (React, TypeScript)
 - **Database:** PostgreSQL
 - **Infrastructure:** AWS CDK (TypeScript)
