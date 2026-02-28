@@ -1,0 +1,145 @@
+<!--
+  Screen: S-09 Browse Categories
+  CJX Stage: Discovery
+  FR Mapping: FR-10
+-->
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Categories — PriceMate AU</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="components.css">
+</head>
+<body class="cjx-discovery">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="app-layout">
+
+    <!-- NavBar -->
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="s01-landing-page.html" class="navbar-logo">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1976D2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="brand-price">Price</span><span class="brand-mate">Mate</span> <span style="font-weight:400;font-size:14px;color:var(--color-text-soft)">AU</span>
+      </a>
+      <div class="navbar-search">
+        <div class="search-bar">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="form-input" placeholder="Search Amazon AU products...">
+        </div>
+      </div>
+      <div class="navbar-actions">
+        <a href="s10-public-deals.html" class="navbar-link">Deals</a>
+        <a href="s09-browse-categories.html" class="navbar-link active">Categories</a>
+        <a href="s03-login.html" class="navbar-link">Log In</a>
+        <a href="s02-register.html" class="btn btn-primary btn-sm">Sign Up</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </nav>
+
+    <main id="main" class="main-content" role="main" data-cjx-entrance>
+
+      <h1 class="mb-sm" data-cjx-entrance>Browse Categories</h1>
+      <p class="text-secondary mb-lg" data-cjx-entrance>Discover tracked products by Amazon AU category.</p>
+
+      <!-- Category Grid -->
+      <div class="category-grid" data-cjx-entrance>
+
+        <!-- Electronics -->
+        <div class="category-card card-clickable" data-href="s05-search-results.html">
+          <div class="category-card-image" style="background: linear-gradient(135deg, #EEF2FF, #E0E7FF); display:flex; align-items:center; justify-content:center;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="category-card-body">
+            <h3>Electronics</h3>
+            <span class="product-count">142 products</span>
+          </div>
+        </div>
+
+        <!-- Computers -->
+        <div class="category-card card-clickable" data-href="s05-search-results.html">
+          <div class="category-card-image" style="background: linear-gradient(135deg, #F0FDF4, #DCFCE7); display:flex; align-items:center; justify-content:center;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#388E3C" stroke-width="1.5"><rect x="2" y="4" width="20" height="12" rx="2"/><path d="M6 20h12"/><path d="M10 16v4"/><path d="M14 16v4"/></svg>
+          </div>
+          <div class="category-card-body">
+            <h3>Computers</h3>
+            <span class="product-count">98 products</span>
+          </div>
+        </div>
+
+        <!-- Home & Kitchen -->
+        <div class="category-card card-clickable" data-href="s05-search-results.html">
+          <div class="category-card-image" style="background: linear-gradient(135deg, #FFF7ED, #FFEDD5); display:flex; align-items:center; justify-content:center;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#F9A825" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="category-card-body">
+            <h3>Home & Kitchen</h3>
+            <span class="product-count">76 products</span>
+          </div>
+        </div>
+
+        <!-- Books -->
+        <div class="category-card card-clickable" data-href="s05-search-results.html">
+          <div class="category-card-image" style="background: linear-gradient(135deg, #FEF2F2, #FEE2E2); display:flex; align-items:center; justify-content:center;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D32F2F" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="category-card-body">
+            <h3>Books</h3>
+            <span class="product-count">210 products</span>
+          </div>
+        </div>
+
+        <!-- Sports & Outdoors -->
+        <div class="category-card card-clickable" data-href="s05-search-results.html">
+          <div class="category-card-image" style="background: linear-gradient(135deg, #ECFEFF, #CFFAFE); display:flex; align-items:center; justify-content:center;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0288D1" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          </div>
+          <div class="category-card-body">
+            <h3>Sports & Outdoors</h3>
+            <span class="product-count">54 products</span>
+          </div>
+        </div>
+
+        <!-- Toys & Games -->
+        <div class="category-card card-clickable" data-href="s05-search-results.html">
+          <div class="category-card-image" style="background: linear-gradient(135deg, #FAF5FF, #F3E8FF); display:flex; align-items:center; justify-content:center;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9333EA" stroke-width="1.5"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+          </div>
+          <div class="category-card-body">
+            <h3>Toys & Games</h3>
+            <span class="product-count">38 products</span>
+          </div>
+        </div>
+
+        <!-- Beauty -->
+        <div class="category-card card-clickable" data-href="s05-search-results.html">
+          <div class="category-card-image" style="background: linear-gradient(135deg, #FDF2F8, #FCE7F3); display:flex; align-items:center; justify-content:center;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#DB2777" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="category-card-body">
+            <h3>Beauty</h3>
+            <span class="product-count">63 products</span>
+          </div>
+        </div>
+
+        <!-- Fashion -->
+        <div class="category-card card-clickable" data-href="s05-search-results.html">
+          <div class="category-card-image" style="background: linear-gradient(135deg, #F8FAFC, #F1F5F9); display:flex; align-items:center; justify-content:center;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="1.5"><path d="M20.38 3.46L16 2 12 5.5 8 2l-4.38 1.46a2 2 0 0 0-1.34 1.68l-.76 7.61a2 2 0 0 0 .52 1.56L12 22l9.96-7.69a2 2 0 0 0 .52-1.56l-.76-7.61a2 2 0 0 0-1.34-1.68z"/></svg>
+          </div>
+          <div class="category-card-body">
+            <h3>Fashion</h3>
+            <span class="product-count">87 products</span>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="interactions.js"></script>
+</body>
+</html>

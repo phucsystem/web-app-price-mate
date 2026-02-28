@@ -1,0 +1,235 @@
+<!--
+  Screen: S-08 Dashboard
+  CJX Stage: Retention
+  FR Mapping: FR-08, FR-12
+-->
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — PriceMate AU</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="components.css">
+</head>
+<body class="cjx-retention">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="app-layout">
+
+    <!-- NavBar -->
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="s01-landing-page.html" class="navbar-logo">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1976D2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="brand-price">Price</span><span class="brand-mate">Mate</span> <span style="font-weight:400;font-size:14px;color:var(--color-text-soft)">AU</span>
+      </a>
+      <div class="navbar-search">
+        <div class="search-bar">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="form-input" placeholder="Search Amazon AU products...">
+        </div>
+      </div>
+      <div class="navbar-actions">
+        <a href="s08-dashboard.html" class="navbar-link active">Dashboard</a>
+        <a href="s10-public-deals.html" class="navbar-link">Deals</a>
+        <a href="#" class="navbar-link">Log Out</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </nav>
+
+    <main id="main" class="main-content" role="main" data-cjx-entrance>
+
+      <h1 class="mb-lg" data-cjx-entrance>My Tracked Items</h1>
+
+      <!-- Summary Bar -->
+      <div class="summary-bar" data-cjx-entrance>
+        <div class="summary-item">
+          <span class="summary-item-label">Total Tracked</span>
+          <span class="summary-item-value">5</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-item-label">Active Alerts</span>
+          <span class="summary-item-value">3</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-item-label">Recent Drops</span>
+          <span class="summary-item-value" style="color: var(--color-success);">2</span>
+        </div>
+      </div>
+
+      <!-- Sort / Filter -->
+      <div class="filter-bar" data-cjx-entrance>
+        <div class="filter-bar-left">5 items</div>
+        <div class="filter-bar-right">
+          <label class="form-label" style="margin:0;" for="sort-select">Sort by</label>
+          <select id="sort-select" class="select-input">
+            <option>Price drop %</option>
+            <option>Date added</option>
+            <option>Name</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Dashboard Product Grid -->
+      <div class="product-grid" data-cjx-entrance>
+
+        <!-- Card 1 -->
+        <div class="dashboard-card" data-href="s07-product-detail.html">
+          <div class="dashboard-card-top">
+            <img class="dashboard-card-image" src="https://placehold.co/80x80/F8FAFC/64748B?text=Sony" alt="Sony WH-1000XM5">
+            <div class="dashboard-card-info">
+              <div class="dashboard-card-title">Sony WH-1000XM5 Wireless Noise Cancelling Headphones</div>
+              <div class="dashboard-card-price-row">
+                <span class="price-sm">$349.00</span>
+                <span class="price-change down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;width:14px;height:14px;"><path d="m6 9 6 6 6-6"/></svg> 18%</span>
+              </div>
+              <div class="dashboard-card-meta">
+                <span class="alert-dot active" title="Alert active"></span>
+                <span style="font: var(--text-xs); color: var(--gray5);">Alert: $299.00</span>
+              </div>
+            </div>
+          </div>
+          <div class="sparkline-container">
+            <svg viewBox="0 0 200 32" preserveAspectRatio="none">
+              <polyline fill="none" stroke="#1976D2" stroke-width="1.5" points="0,28 25,24 50,20 75,16 100,18 125,22 150,14 175,12 200,12"/>
+            </svg>
+          </div>
+          <div class="dashboard-card-actions">
+            <button class="btn btn-danger btn-sm" data-action="remove">Remove</button>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="dashboard-card" data-href="s07-product-detail.html">
+          <div class="dashboard-card-top">
+            <img class="dashboard-card-image" src="https://placehold.co/80x80/F8FAFC/64748B?text=Kindle" alt="Kindle Paperwhite">
+            <div class="dashboard-card-info">
+              <div class="dashboard-card-title">Kindle Paperwhite (16 GB) 6.8" Display, Adjustable Warm Light</div>
+              <div class="dashboard-card-price-row">
+                <span class="price-sm">$189.00</span>
+                <span class="price-change down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;width:14px;height:14px;"><path d="m6 9 6 6 6-6"/></svg> 12%</span>
+              </div>
+              <div class="dashboard-card-meta">
+                <span class="alert-dot active" title="Alert active"></span>
+                <span style="font: var(--text-xs); color: var(--gray5);">Alert: $170.00</span>
+              </div>
+            </div>
+          </div>
+          <div class="sparkline-container">
+            <svg viewBox="0 0 200 32" preserveAspectRatio="none">
+              <polyline fill="none" stroke="#1976D2" stroke-width="1.5" points="0,8 25,10 50,14 75,12 100,16 125,20 150,18 175,22 200,24"/>
+            </svg>
+          </div>
+          <div class="dashboard-card-actions">
+            <button class="btn btn-danger btn-sm" data-action="remove">Remove</button>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="dashboard-card" data-href="s07-product-detail.html">
+          <div class="dashboard-card-top">
+            <img class="dashboard-card-image" src="https://placehold.co/80x80/F8FAFC/64748B?text=MX+Master" alt="Logitech MX Master 3S">
+            <div class="dashboard-card-info">
+              <div class="dashboard-card-title">Logitech MX Master 3S Wireless Performance Mouse</div>
+              <div class="dashboard-card-price-row">
+                <span class="price-sm">$119.00</span>
+                <span class="price-change down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;width:14px;height:14px;"><path d="m6 9 6 6 6-6"/></svg> 22%</span>
+              </div>
+              <div class="dashboard-card-meta">
+                <span class="alert-dot active" title="Alert active"></span>
+                <span style="font: var(--text-xs); color: var(--gray5);">Alert: $99.00</span>
+              </div>
+            </div>
+          </div>
+          <div class="sparkline-container">
+            <svg viewBox="0 0 200 32" preserveAspectRatio="none">
+              <polyline fill="none" stroke="#388E3C" stroke-width="1.5" points="0,20 25,18 50,22 75,16 100,14 125,12 150,10 175,8 200,6"/>
+            </svg>
+          </div>
+          <div class="dashboard-card-actions">
+            <button class="btn btn-danger btn-sm" data-action="remove">Remove</button>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="dashboard-card" data-href="s07-product-detail.html">
+          <div class="dashboard-card-top">
+            <img class="dashboard-card-image" src="https://placehold.co/80x80/F8FAFC/64748B?text=AirPods" alt="Apple AirPods Pro">
+            <div class="dashboard-card-info">
+              <div class="dashboard-card-title">Apple AirPods Pro (2nd Gen) with USB-C MagSafe Charging Case</div>
+              <div class="dashboard-card-price-row">
+                <span class="price-sm">$369.00</span>
+                <span class="price-change up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;width:14px;height:14px;"><path d="m18 15-6-6-6 6"/></svg> 3%</span>
+              </div>
+              <div class="dashboard-card-meta">
+                <span class="alert-dot inactive" title="No alert set"></span>
+                <span style="font: var(--text-xs); color: var(--gray5);">No alert</span>
+              </div>
+            </div>
+          </div>
+          <div class="sparkline-container">
+            <svg viewBox="0 0 200 32" preserveAspectRatio="none">
+              <polyline fill="none" stroke="#D32F2F" stroke-width="1.5" points="0,24 25,22 50,20 75,18 100,16 125,14 150,12 175,10 200,8"/>
+            </svg>
+          </div>
+          <div class="dashboard-card-actions">
+            <button class="btn btn-danger btn-sm" data-action="remove">Remove</button>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="dashboard-card" data-href="s07-product-detail.html">
+          <div class="dashboard-card-top">
+            <img class="dashboard-card-image" src="https://placehold.co/80x80/F8FAFC/64748B?text=Samsung+T7" alt="Samsung T7 SSD">
+            <div class="dashboard-card-info">
+              <div class="dashboard-card-title">Samsung T7 Portable SSD 1TB USB 3.2 External Solid State Drive</div>
+              <div class="dashboard-card-price-row">
+                <span class="price-sm">$139.00</span>
+                <span class="price-change down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;width:14px;height:14px;"><path d="m6 9 6 6 6-6"/></svg> 7%</span>
+              </div>
+              <div class="dashboard-card-meta">
+                <span class="alert-dot inactive" title="No alert set"></span>
+                <span style="font: var(--text-xs); color: var(--gray5);">No alert</span>
+              </div>
+            </div>
+          </div>
+          <div class="sparkline-container">
+            <svg viewBox="0 0 200 32" preserveAspectRatio="none">
+              <polyline fill="none" stroke="#1976D2" stroke-width="1.5" points="0,12 25,14 50,16 75,14 100,18 125,16 150,20 175,22 200,20"/>
+            </svg>
+          </div>
+          <div class="dashboard-card-actions">
+            <button class="btn btn-danger btn-sm" data-action="remove">Remove</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Infinite scroll loading -->
+      <div class="loading-section" style="display: flex; gap: var(--space-md); padding: var(--space-lg) 0;">
+        <div class="skeleton-card" style="flex:1">
+          <div class="skeleton skeleton-image"></div>
+          <div class="skeleton skeleton-text" style="margin-top: var(--space-sm)"></div>
+          <div class="skeleton skeleton-text short"></div>
+          <div class="skeleton skeleton-text price"></div>
+        </div>
+        <div class="skeleton-card" style="flex:1">
+          <div class="skeleton skeleton-image"></div>
+          <div class="skeleton skeleton-text" style="margin-top: var(--space-sm)"></div>
+          <div class="skeleton skeleton-text short"></div>
+          <div class="skeleton skeleton-text price"></div>
+        </div>
+      </div>
+
+      <!-- Floating Action Button: Track New Item -->
+      <a href="s06-add-product-url.html" class="fab" title="Track New Item" aria-label="Track New Item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M12 5v14M5 12h14"/></svg>
+      </a>
+
+    </main>
+  </div>
+
+  <script src="interactions.js"></script>
+</body>
+</html>

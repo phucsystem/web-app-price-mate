@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+.npm/
+packages/
+
+# Build
+bin/
+obj/
+dist/
+out/
+.next/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+.vs/
+*.suo
+*.user
+*.swp
+*.sln.docstates
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.log
+
+# Secrets
+*.pfx
+*.key
+*.pem

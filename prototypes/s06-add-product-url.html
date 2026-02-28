@@ -1,0 +1,93 @@
+<!--
+  Screen: S-06 Add Product (URL)
+  CJX Stage: Usage
+  FR Mapping: FR-03
+-->
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track a Product — PriceMate AU</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="components.css">
+</head>
+<body class="cjx-usage">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="app-layout">
+
+    <!-- NavBar -->
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="s01-landing-page.html" class="navbar-logo">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1976D2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="brand-price">Price</span><span class="brand-mate">Mate</span> <span style="font-weight:400;font-size:14px;color:var(--color-text-soft)">AU</span>
+      </a>
+      <div class="navbar-search">
+        <div class="search-bar">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="form-input" placeholder="Search Amazon AU products...">
+        </div>
+      </div>
+      <div class="navbar-actions">
+        <a href="s08-dashboard.html" class="navbar-link">Dashboard</a>
+        <a href="s10-public-deals.html" class="navbar-link">Deals</a>
+        <a href="#" class="navbar-link">Log Out</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </nav>
+
+    <main id="main" class="main-content" style="max-width: var(--max-width-form);" role="main" data-cjx-entrance>
+
+      <div class="card" data-cjx-entrance>
+        <h1 class="mb-sm">Track a Product</h1>
+        <p class="text-secondary mb-lg">Paste an Amazon AU product URL to start tracking its price.</p>
+
+        <!-- URL Input -->
+        <div class="form-group">
+          <label class="form-label" for="product-url">Amazon AU Product URL</label>
+          <input id="product-url" type="url" class="form-input" placeholder="Paste Amazon AU product URL..." data-url-input>
+        </div>
+
+        <button class="btn btn-secondary" data-action="fetch-product">Fetch Product</button>
+
+        <!-- Product Preview (hidden until fetched) -->
+        <div class="product-preview" style="display:none;">
+          <img class="product-preview-image" src="https://placehold.co/100x100/F8FAFC/64748B?text=Product" alt="Product preview">
+          <div class="product-preview-info">
+            <h3>Sony WH-1000XM5 Wireless Noise Cancelling Headphones</h3>
+            <div class="mt-xs">
+              <span class="price-sm">$349.00</span>
+            </div>
+            <div class="asin">ASIN: B0BX2L8PW2</div>
+          </div>
+        </div>
+
+        <!-- Target Price (optional) -->
+        <div class="form-group mt-lg">
+          <label class="form-label" for="target-price">Target Price (optional)</label>
+          <div class="input-group">
+            <span class="input-prefix">AUD</span>
+            <input id="target-price" type="number" class="form-input" placeholder="e.g. 299.00" step="0.01" min="0">
+          </div>
+          <p class="form-hint">We'll alert you when the price drops to or below this amount.</p>
+        </div>
+
+        <button class="btn btn-primary btn-block btn-lg mt-md">Start Tracking</button>
+
+        <!-- Error State (hidden by default) -->
+        <div id="error-state" style="display:none;" class="mt-md">
+          <div style="padding: var(--space-md); background: rgba(211,47,47,0.06); border: 1px solid rgba(211,47,47,0.2); border-radius: var(--radius-md);">
+            <p style="color: var(--color-error); font-weight: 500; margin-bottom: var(--space-xs);">Invalid URL</p>
+            <p class="text-secondary" style="font: var(--text-sm);">Please enter a valid Amazon AU (amazon.com.au) product URL.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="interactions.js"></script>
+</body>
+</html>
