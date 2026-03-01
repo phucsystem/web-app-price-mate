@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from '@tanstack/react-form'
 import Image from 'next/image'
-import { NavBar } from '@/components/shared/nav-bar'
 import { trackProductUrl } from '@/services/product-service'
 import type { TrackedProduct } from '@/_types/domain'
 
@@ -51,9 +50,7 @@ export default function TrackPage() {
   }
 
   return (
-    <>
-      <NavBar isAuthenticated />
-      <main className="max-w-xl mx-auto px-4 py-10">
+    <div className="max-w-xl mx-auto">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Track a Product</h1>
         <p className="text-sm text-gray-500 mb-8">Paste an Amazon AU product URL to start tracking its price.</p>
 
@@ -163,7 +160,6 @@ export default function TrackPage() {
             {form.state.isSubmitting ? 'Starting tracking…' : 'Start Tracking'}
           </button>
         </form>
-      </main>
-    </>
+    </div>
   )
 }

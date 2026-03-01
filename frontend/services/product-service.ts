@@ -23,7 +23,7 @@ export interface TrackUrlPayload {
 }
 
 export async function searchProducts(query: string, cursor?: string): Promise<SearchResult> {
-  const params = new URLSearchParams({ q: query })
+  const params = new URLSearchParams({ q: query, limit: '20' })
   if (cursor) params.set('cursor', cursor)
   const result = await apiClient<ApiResponse<Product[]>>(`/api/products/search?${params}`)
   return {

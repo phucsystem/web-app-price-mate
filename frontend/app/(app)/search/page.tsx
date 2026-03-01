@@ -2,7 +2,6 @@
 
 import { Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { NavBar } from '@/components/shared/nav-bar'
 import { SearchBar } from '@/components/shared/search-bar'
 import { ProductCard } from '@/components/product/product-card'
 import { InfiniteScroll } from '@/components/shared/infinite-scroll'
@@ -108,21 +107,18 @@ function SearchBarWithQuery() {
 export default function SearchPage() {
   return (
     <>
-      <NavBar />
-      <main className="max-w-6xl mx-auto px-4 py-6">
-        <Suspense fallback={<div className="mb-6 h-10 max-w-xl bg-gray-100 animate-pulse rounded-md" />}>
-          <SearchBarWithQuery />
-        </Suspense>
-        <Suspense fallback={
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {Array.from({ length: 6 }).map((_, idx) => (
-              <div key={idx} className="h-32 rounded-lg bg-gray-100 animate-pulse" />
-            ))}
-          </div>
-        }>
-          <SearchResultsContent />
-        </Suspense>
-      </main>
+      <Suspense fallback={<div className="mb-6 h-10 max-w-xl bg-gray-100 animate-pulse rounded-md" />}>
+        <SearchBarWithQuery />
+      </Suspense>
+      <Suspense fallback={
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {Array.from({ length: 6 }).map((_, idx) => (
+            <div key={idx} className="h-32 rounded-lg bg-gray-100 animate-pulse" />
+          ))}
+        </div>
+      }>
+        <SearchResultsContent />
+      </Suspense>
     </>
   )
 }
