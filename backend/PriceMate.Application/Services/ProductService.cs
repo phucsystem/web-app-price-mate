@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using PriceMate.Application.DTOs.Amazon;
 using PriceMate.Application.DTOs.Common;
-
 using PriceMate.Application.DTOs.Dashboard;
 using PriceMate.Application.DTOs.Products;
 using PriceMate.Application.Helpers;
@@ -9,14 +10,29 @@ using PriceMate.Domain.Entities;
 
 namespace PriceMate.Application.Services;
 
-public class ProductService(IApplicationDbContext dbContext) : IProductService
+public class ProductService(
+    IApplicationDbContext dbContext,
+    IAmazonProductService amazonProductService,
+    ILogger<ProductService> logger) : IProductService
 {
     public async Task<PagedResponse<ProductDto>> SearchAsync(string query, CursorPaginationParams pagination, CancellationToken ct)
     {
         var limit = pagination.ClampedLimit;
+
+        // URL path — extract ASIN and look up directly via Amazon API
+        var asin = ExtractAsin(query);
+        if (asin is not null)
+        {
+            var productDto = await GetOrFetchByAsinAsync(asin, ct);
+            if (productDto is not null)
+                return new PagedResponse<ProductDto>([productDto], null, false);
+            return new PagedResponse<ProductDto>([], null, false);
+        }
+
+        // Keyword search — try local DB first
         var dbQuery = dbContext.Products
             .Include(p => p.Category)
-            .Where(p => p.Title.Contains(query) || p.Asin == query);
+            .Where(p => p.Title.Contains(query));
 
         if (pagination.Cursor.HasValue)
             dbQuery = dbQuery.Where(p => p.Id.CompareTo(pagination.Cursor.Value) > 0);
@@ -29,10 +45,20 @@ public class ProductService(IApplicationDbContext dbContext) : IProductService
         var hasMore = items.Count > limit;
         if (hasMore) items.RemoveAt(items.Count - 1);
 
-        var dtos = items.Select(MapToProductDto).ToList();
-        var nextCursor = hasMore ? items.Last().Id.ToString() : null;
+        if (items.Count > 0)
+        {
+            var dtos = items.Select(MapToProductDto).ToList();
+            var nextCursor = hasMore ? items.Last().Id.ToString() : null;
+            return new PagedResponse<ProductDto>(dtos, nextCursor, hasMore);
+        }
 
-        return new PagedResponse<ProductDto>(dtos, nextCursor, hasMore);
+        // Local DB empty — fall back to Amazon PA API
+        var amazonResults = await SearchAmazonAsync(query, limit, ct);
+        if (amazonResults.Count > 0)
+            await UpsertProductsAsync(amazonResults, ct);
+
+        var resultDtos = amazonResults.Select(MapAmazonResultToProductDto).ToList();
+        return new PagedResponse<ProductDto>(resultDtos, null, false);
     }
 
     public async Task<ProductDetailDto> GetByAsinAsync(string asin, Guid? userId, CancellationToken ct)
@@ -141,6 +167,117 @@ public class ProductService(IApplicationDbContext dbContext) : IProductService
         );
     }
 
+    // --- Private helpers ---
+
+    private async Task<ProductDto?> GetOrFetchByAsinAsync(string asin, CancellationToken ct)
+    {
+        var existing = await dbContext.Products
+            .Include(p => p.Category)
+            .FirstOrDefaultAsync(p => p.Asin == asin, ct);
+
+        if (existing is not null)
+            return MapToProductDto(existing);
+
+        var amazonItems = await FetchAmazonByAsinsAsync([asin], ct);
+        if (amazonItems.Count == 0)
+            return null;
+
+        await UpsertProductsAsync(
+            amazonItems.Select(item => new AmazonSearchResult(
+                item.Asin,
+                item.Title ?? item.Asin,
+                item.ImageUrl,
+                item.CurrentPrice,
+                $"https://www.amazon.com.au/dp/{item.Asin}",
+                null
+            )).ToList(), ct);
+
+        return new ProductDto(
+            amazonItems[0].Asin,
+            amazonItems[0].Title ?? amazonItems[0].Asin,
+            amazonItems[0].ImageUrl,
+            amazonItems[0].CurrentPrice ?? 0m,
+            $"https://www.amazon.com.au/dp/{amazonItems[0].Asin}",
+            null,
+            null
+        );
+    }
+
+    private async Task<List<AmazonSearchResult>> SearchAmazonAsync(string query, int limit, CancellationToken ct)
+    {
+        try
+        {
+            return await amazonProductService.SearchItemsAsync(query, limit, ct);
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "Amazon PA API search failed for query '{Query}'. Returning empty results.", query);
+            return [];
+        }
+    }
+
+    private async Task<List<AmazonProductData>> FetchAmazonByAsinsAsync(List<string> asins, CancellationToken ct)
+    {
+        try
+        {
+            return await amazonProductService.GetItemsByAsinAsync(asins, ct);
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "Amazon PA API ASIN lookup failed for {Asins}. Returning empty results.", string.Join(",", asins));
+            return [];
+        }
+    }
+
+    private async Task UpsertProductsAsync(List<AmazonSearchResult> results, CancellationToken ct)
+    {
+        var asins = results.Select(r => r.Asin).ToList();
+        var existing = await dbContext.Products
+            .Where(p => asins.Contains(p.Asin))
+            .ToDictionaryAsync(p => p.Asin, ct);
+
+        foreach (var result in results)
+        {
+            if (string.IsNullOrWhiteSpace(result.Asin)) continue;
+
+            var price = result.Price ?? 0m;
+
+            if (existing.TryGetValue(result.Asin, out var product))
+            {
+                product.Title = result.Title;
+                product.ImageUrl = result.ImageUrl;
+                product.CurrentPrice = price;
+                product.LastFetchedAt = DateTime.UtcNow;
+            }
+            else
+            {
+                dbContext.Products.Add(new Product
+                {
+                    Id = Guid.NewGuid(),
+                    Asin = result.Asin,
+                    Title = result.Title,
+                    ImageUrl = result.ImageUrl,
+                    AmazonUrl = result.AmazonUrl,
+                    CurrentPrice = price,
+                    LowestPrice = price,
+                    HighestPrice = price,
+                    AveragePrice = price,
+                    LastFetchedAt = DateTime.UtcNow,
+                    CreatedAt = DateTime.UtcNow
+                });
+            }
+        }
+
+        try
+        {
+            await dbContext.SaveChangesAsync(ct);
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "Failed to upsert Amazon products to DB.");
+        }
+    }
+
     private static ProductDto MapToProductDto(Product product) => new(
         product.Asin,
         product.Title,
@@ -149,6 +286,16 @@ public class ProductService(IApplicationDbContext dbContext) : IProductService
         product.AmazonUrl,
         DealScoreCalculator.Calculate(product.CurrentPrice, product.LowestPrice, product.HighestPrice),
         product.Category?.Name
+    );
+
+    private static ProductDto MapAmazonResultToProductDto(AmazonSearchResult result) => new(
+        result.Asin,
+        result.Title,
+        result.ImageUrl,
+        result.Price ?? 0m,
+        result.AmazonUrl,
+        null,
+        result.Category
     );
 
     private static DateTime? GetRangeCutoff(string range) => range switch
@@ -163,7 +310,8 @@ public class ProductService(IApplicationDbContext dbContext) : IProductService
 
     private static string? ExtractAsin(string url)
     {
-        if (!url.Contains("amazon.com.au", StringComparison.OrdinalIgnoreCase))
+        if (!url.Contains("amazon.com.au", StringComparison.OrdinalIgnoreCase) &&
+            !url.Contains("/dp/", StringComparison.OrdinalIgnoreCase))
             return null;
 
         var dpIndex = url.IndexOf("/dp/", StringComparison.OrdinalIgnoreCase);
