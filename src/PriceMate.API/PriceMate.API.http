@@ -1,0 +1,6 @@
+@PriceMate.API_HostAddress = http://localhost:5125
+
+GET {{PriceMate.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

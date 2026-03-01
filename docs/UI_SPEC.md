@@ -4,7 +4,7 @@
 
 ### Reference Source
 - Design system: https://phucsystem.github.io/mobile-app-design-systems/prototypes/s01-showcase-home.html
-- UI Library: Tamagui (https://tamagui.dev/) — universal React styling, optimized CSS, built-in token system
+- UI Library: Tailwind CSS v4 — utility-first CSS, `@theme {}` token system in `app/globals.css`
 - Logo: PriceMate mascot (blue cart with green dollar bill + orange checkmark)
 - Style: Clean & Minimal with Material Design influence
 - Focus: Readability, simple price charts, clean product cards
@@ -20,13 +20,13 @@
 | --color-brand-success | #388E3C | Dollar bill | Price drops, positive states |
 | --color-brand-orange | #F9A825 | Checkmark | Alerts, warnings, CTA accents |
 
-### UI Library: Tamagui
+### UI Library: Tailwind CSS v4
 
-- **Package:** `tamagui` (full UI kit) + `@tamagui/config` (preset)
-- **Integration:** Next.js with `TamaguiProvider`, SSR support
-- **Theming:** Built-in token system (`createTamagui`, `createTokens`)
-- **Components:** View, Text, Button, Input, Card, Sheet, Dialog, XStack, YStack
-- **Benefits:** Optimized CSS output, responsive with `$gtSm/$gtMd/$gtLg`, typed tokens
+- **Package:** `tailwindcss@^4` + `@tailwindcss/postcss` + `@tailwindcss/forms` + `@tailwindcss/typography`
+- **Integration:** Next.js App Router; tokens defined via `@theme {}` in `app/globals.css` (no `tailwind.config.ts`)
+- **Data fetching:** TanStack Query v5 (`@tanstack/react-query`) for server state
+- **Forms:** TanStack Form v1 (`@tanstack/react-form`) for form state and validation
+- **Benefits:** Zero-config CSS output, standard CSS custom properties, native cascade layers
 
 ### Color Palette
 

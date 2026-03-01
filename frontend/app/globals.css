@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* Brand colors */
+  --color-brand-blue: #1976D2;
+  --color-brand-navy: #1B365D;
+  --color-brand-green: #4CAF50;
+  --color-brand-success: #388E3C;
+  --color-brand-orange: #F9A825;
+
+  /* Primary */
+  --color-primary: #1976D2;
+  --color-primary-light: #42A5F5;
+  --color-primary-dark: #1565C0;
+  --color-primary-bg: #E3F2FD;
+
+  /* Semantic */
+  --color-success: #388E3C;
+  --color-warning: #F9A825;
+  --color-error: #D32F2F;
+  --color-info: #0288D1;
+
+  /* Surface */
+  --color-surface: #FFFFFF;
+  --color-surface-soft: #F5F5F5;
+  --color-border: #E0E0E0;
+
+  /* Text */
+  --color-text: #212121;
+  --color-text-soft: #757575;
+
+  /* Gray scale */
+  --color-gray-1: #FAFAFA;
+  --color-gray-2: #F5F5F5;
+  --color-gray-3: #EEEEEE;
+  --color-gray-4: #E0E0E0;
+  --color-gray-5: #BDBDBD;
+  --color-gray-6: #9E9E9E;
+  --color-gray-7: #757575;
+  --color-gray-8: #616161;
+  --color-gray-9: #424242;
+  --color-gray-10: #212121;
+
+  /* Font families */
+  --font-family-heading: -apple-system, BlinkMacSystemFont, "SF Pro Display", Roboto, sans-serif;
+  --font-family-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", Roboto, sans-serif;
+  --font-family-mono: "SF Mono", "Roboto Mono", monospace;
+
+  /* Border radius */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #212121;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Roboto, sans-serif;
+}

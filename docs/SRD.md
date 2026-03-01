@@ -11,10 +11,10 @@
 - Serve as a public deals discovery platform for organic growth
 
 **Tech Stack:**
-- Backend: .NET 10 Web API (LTS) (C#)
-- Frontend: Next.js (React, TypeScript)
+- Backend: .NET 9 Web API (C#) — Clean Architecture
+- Frontend: Next.js 16 + Tailwind CSS v4 + TanStack Query/Form (React 19, TypeScript)
 - Database: PostgreSQL
-- Infrastructure: AWS CDK (TypeScript)
+- Infrastructure: AWS CDK (TypeScript) — RDS, ECS Fargate x2, CloudFront
 - Local Dev: Docker Compose
 - Data Source: Amazon Product Advertising API 5.0
 
@@ -100,8 +100,8 @@ Category (1) ──< Product (N)
 
 | ID | Decision | Chosen | Rationale |
 |----|----------|--------|-----------|
-| D-01 | Backend framework | .NET 10 Web API (LTS) | User learning goal; mature, performant |
-| D-02 | Frontend framework | Next.js + Tamagui (React/TS) | SSR for SEO; Tamagui for universal styling, optimized CSS output, design token system |
+| D-01 | Backend framework | .NET 9 Web API | User learning goal; mature, performant; .NET 10 SDK unavailable at build time |
+| D-02 | Frontend framework | Next.js 16 + Tailwind CSS v4 + TanStack Query/Form | SSR for SEO; Tailwind v4 for styling (user decision over Tamagui); TanStack for data fetching and forms |
 | D-03 | Database | PostgreSQL | Time-series price data; robust querying |
 | D-04 | Infrastructure | AWS CDK (TypeScript) | IaC; user preference |
 | D-05 | Local dev | Docker Compose | PostgreSQL + API containerized |

@@ -9,23 +9,32 @@ obj/
 dist/
 out/
 .next/
+*.tsbuildinfo
+*.nupkg
+*.snupkg
+TestResults/
 
 # Environment
 .env
 .env.*
 !.env.example
+appsettings.*.local.json
 
 # IDE
 .idea/
 .vs/
+.vscode/settings.json
+.vscode/launch.json
 *.suo
 *.user
 *.swp
 *.sln.docstates
+*.DotSettings.user
 
 # OS
 .DS_Store
 Thumbs.db
+desktop.ini
 
 # Docker
 *.log
