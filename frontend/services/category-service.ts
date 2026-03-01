@@ -3,10 +3,14 @@ import type { Category } from '@/_types/domain'
 import type { CategoryProducts } from '@/_types/api'
 
 export async function fetchCategories(): Promise<Category[]> {
-  const res = await fetch(`${API_BASE_URL}/api/categories`, { next: { revalidate: 3600 } })
-  if (!res.ok) return []
-  const body = await res.json()
-  return body.data ?? []
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/categories`, { next: { revalidate: 3600 } })
+    if (!res.ok) return []
+    const body = await res.json()
+    return body.data ?? []
+  } catch {
+    return []
+  }
 }
 
 export async function fetchCategoryProducts(

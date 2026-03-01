@@ -18,9 +18,9 @@ services:
   api:
     build:
       context: .
-      dockerfile: src/PriceMate.API/Dockerfile
+      dockerfile: backend/PriceMate.API/Dockerfile
     ports:
-      - "5000:8080"
+      - "5050:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=pricemate_au;Username=pricemate;Password=${DB_PASSWORD:-dev_password}
@@ -31,12 +31,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
 
   frontend:
     build:
@@ -46,11 +40,10 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=http://localhost:5000
+      - NEXT_PUBLIC_API_URL=http://localhost:5050
       - API_INTERNAL_URL=http://api:8080
     depends_on:
-      api:
-        condition: service_healthy
+      - api
 
 volumes:
   postgres_data:

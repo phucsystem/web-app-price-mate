@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceMate.Domain", "src\PriceMate.Domain\PriceMate.Domain.csproj", "{EB53ED60-BF77-4B77-9ABF-A25642FD1515}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceMate.Domain", "backend\PriceMate.Domain\PriceMate.Domain.csproj", "{EB53ED60-BF77-4B77-9ABF-A25642FD1515}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceMate.Application", "src\PriceMate.Application\PriceMate.Application.csproj", "{27672D9F-2DE2-41A0-87BF-D76CC9FF0F93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceMate.Application", "backend\PriceMate.Application\PriceMate.Application.csproj", "{27672D9F-2DE2-41A0-87BF-D76CC9FF0F93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceMate.Infrastructure", "src\PriceMate.Infrastructure\PriceMate.Infrastructure.csproj", "{6F8D0DC4-EAA3-4841-BC41-BED783605879}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceMate.Infrastructure", "backend\PriceMate.Infrastructure\PriceMate.Infrastructure.csproj", "{6F8D0DC4-EAA3-4841-BC41-BED783605879}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceMate.API", "src\PriceMate.API\PriceMate.API.csproj", "{D9DDEAA6-02ED-486C-A407-95D9BD1BB3A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceMate.API", "backend\PriceMate.API\PriceMate.API.csproj", "{D9DDEAA6-02ED-486C-A407-95D9BD1BB3A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

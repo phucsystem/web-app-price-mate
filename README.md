@@ -13,7 +13,7 @@ Track Amazon AU product prices, view price history, and get alerts when prices d
 ## Project Structure
 
 ```
-src/                    # .NET 9 backend (Clean Architecture)
+backend/                # .NET 9 backend (Clean Architecture)
   PriceMate.Domain/
   PriceMate.Application/
   PriceMate.Infrastructure/
@@ -40,7 +40,7 @@ prototypes/             # HTML mockup prototypes
 docker-compose up -d postgres
 
 # Run the backend API
-cd src/PriceMate.API
+cd backend/PriceMate.API
 dotnet run
 
 # Run the frontend (separate terminal)

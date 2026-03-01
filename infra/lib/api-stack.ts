@@ -30,7 +30,7 @@ export class ApiStack extends cdk.Stack {
         desiredCount: 1,
         taskImageOptions: {
           image: ecs.ContainerImage.fromAsset("..", {
-            file: "src/PriceMate.API/Dockerfile",
+            file: "backend/PriceMate.API/Dockerfile",
           }),
           containerPort: 8080,
           environment: {
