@@ -3,25 +3,30 @@ import { TOKEN_MAX_AGE } from '@/lib/constants'
 
 export async function POST(request: NextRequest) {
   const body = await request.json()
-  const apiUrl = process.env.API_BASE_URL ?? 'http://localhost:5000'
+  const apiUrl = process.env.API_INTERNAL_URL ?? 'http://localhost:5050'
 
-  const backendResponse = await fetch(`${apiUrl}/api/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  })
+  let backendResponse: Response
+  try {
+    backendResponse = await fetch(`${apiUrl}/api/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    })
+  } catch {
+    return NextResponse.json({ message: 'Backend service unavailable' }, { status: 502 })
+  }
 
   if (!backendResponse.ok) {
     const errorBody = await backendResponse.json().catch(() => ({ message: 'Login failed' }))
     return NextResponse.json(errorBody, { status: backendResponse.status })
   }
 
-  const { data } = await backendResponse.json()
+  const result = await backendResponse.json()
   const isProduction = process.env.NODE_ENV === 'production'
 
-  const res = NextResponse.json({ data: { user: data.user } })
+  const res = NextResponse.json({ data: { user: result.user } })
 
-  res.cookies.set('authToken', data.accessToken, {
+  res.cookies.set('authToken', result.accessToken, {
     httpOnly: true,
     secure: isProduction,
     sameSite: 'lax',
@@ -29,7 +34,7 @@ export async function POST(request: NextRequest) {
     path: '/',
   })
 
-  res.cookies.set('refreshToken', data.refreshToken, {
+  res.cookies.set('refreshToken', result.refreshToken, {
     httpOnly: true,
     secure: isProduction,
     sameSite: 'lax',

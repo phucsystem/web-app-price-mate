@@ -15,7 +15,7 @@ export interface DashboardPage {
 }
 
 export async function getDashboard(cursor?: string, sort = 'recent'): Promise<DashboardPage> {
-  const params = new URLSearchParams({ sort })
+  const params = new URLSearchParams({ sort, limit: '20' })
   if (cursor) params.set('cursor', cursor)
   const result = await apiClient<ApiResponse<{ items: TrackedProduct[]; summary: DashboardSummary }>>(
     `/api/dashboard?${params}`,

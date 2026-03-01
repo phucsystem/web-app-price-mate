@@ -7,13 +7,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: 'No refresh token' }, { status: 401 })
   }
 
-  const apiUrl = process.env.API_BASE_URL ?? 'http://localhost:5000'
+  const apiUrl = process.env.API_INTERNAL_URL ?? 'http://localhost:5050'
 
-  const backendResponse = await fetch(`${apiUrl}/api/auth/refresh`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ refreshToken }),
-  })
+  let backendResponse: Response
+  try {
+    backendResponse = await fetch(`${apiUrl}/api/auth/refresh`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refreshToken }),
+    })
+  } catch {
+    return NextResponse.json({ message: 'Backend service unavailable' }, { status: 502 })
+  }
 
   if (!backendResponse.ok) {
     const res = NextResponse.json({ message: 'Token refresh failed' }, { status: 401 })
@@ -22,12 +27,12 @@ export async function POST(request: NextRequest) {
     return res
   }
 
-  const { data } = await backendResponse.json()
+  const result = await backendResponse.json()
   const isProduction = process.env.NODE_ENV === 'production'
 
-  const res = NextResponse.json({ data: { user: data.user } })
+  const res = NextResponse.json({ data: { user: result.user } })
 
-  res.cookies.set('authToken', data.accessToken, {
+  res.cookies.set('authToken', result.accessToken, {
     httpOnly: true,
     secure: isProduction,
     sameSite: 'lax',
@@ -35,7 +40,7 @@ export async function POST(request: NextRequest) {
     path: '/',
   })
 
-  res.cookies.set('refreshToken', data.refreshToken, {
+  res.cookies.set('refreshToken', result.refreshToken, {
     httpOnly: true,
     secure: isProduction,
     sameSite: 'lax',

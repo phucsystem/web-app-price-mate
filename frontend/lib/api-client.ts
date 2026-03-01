@@ -41,6 +41,6 @@ export async function apiClient<T>(url: string, options?: RequestInit): Promise<
 }
 
 export function buildApiUrl(path: string): string {
-  const base = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:5000'
+  const base = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5050'
   return `${base}${path}`
 }

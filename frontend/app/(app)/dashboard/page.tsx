@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useQueryClient } from '@tanstack/react-query'
-import { NavBar } from '@/components/shared/nav-bar'
 import { SummaryBar } from '@/components/dashboard/summary-bar'
 import { TrackedItemCard } from '@/components/dashboard/tracked-item-card'
 import { InfiniteScroll } from '@/components/shared/infinite-scroll'
@@ -40,8 +39,6 @@ export default function DashboardPage() {
 
   return (
     <>
-      <NavBar isAuthenticated />
-      <main className="max-w-5xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold text-gray-900">My Dashboard</h1>
           <Link
@@ -121,8 +118,6 @@ export default function DashboardPage() {
             />
           </>
         )}
-      </main>
-
       <Link
         href="/track"
         className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition-colors text-2xl font-light"

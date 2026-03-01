@@ -3,6 +3,7 @@
 import { useForm } from '@tanstack/react-form'
 import { useState } from 'react'
 import Link from 'next/link'
+import { API_BASE_URL } from '@/lib/constants'
 
 type Step = 'request' | 'success' | 'reset'
 
@@ -17,8 +18,7 @@ function RequestEmailForm({ onSuccess }: { onSuccess: () => void }) {
     defaultValues: { email: '' },
     onSubmit: async ({ value }) => {
       setServerError(null)
-      const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:5000'
-      const response = await fetch(`${apiUrl}/api/auth/forgot-password`, {
+      const response = await fetch(`${API_BASE_URL}/api/auth/forgot-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(value),
@@ -105,8 +105,7 @@ function NewPasswordForm({ token }: { token: string }) {
     defaultValues: { password: '', confirmPassword: '' },
     onSubmit: async ({ value }) => {
       setServerError(null)
-      const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:5000'
-      const response = await fetch(`${apiUrl}/api/auth/reset-password`, {
+      const response = await fetch(`${API_BASE_URL}/api/auth/reset-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token, password: value.password }),

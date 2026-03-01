@@ -7,7 +7,7 @@ import type { Product } from '@/_types/domain'
 
 async function fetchTopDeals(): Promise<Product[]> {
   try {
-    const base = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:5000'
+    const base = process.env.API_INTERNAL_URL ?? process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5050'
     const response = await fetch(`${base}/api/products/top-deals`, { next: { revalidate: 3600 } })
     if (!response.ok) return []
     const body = await response.json()

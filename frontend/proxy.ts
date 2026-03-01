@@ -1,7 +1,7 @@
 import { jwtVerify } from 'jose'
 import { NextRequest, NextResponse } from 'next/server'
 
-const secret = new TextEncoder().encode(process.env.JWT_SECRET ?? 'dev-secret-change-in-production')
+const secret = new TextEncoder().encode(process.env.JWT_SECRET ?? 'dev_secret_key_minimum_32_characters_long')
 
 const protectedRoutes = ['/dashboard', '/track']
 const authRoutes = ['/login', '/register', '/reset-password']

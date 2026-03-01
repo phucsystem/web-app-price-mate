@@ -42,6 +42,7 @@ services:
       - NODE_ENV=production
       - NEXT_PUBLIC_API_URL=http://localhost:5050
       - API_INTERNAL_URL=http://api:8080
+      - JWT_SECRET=${JWT_SECRET:-dev_secret_key_minimum_32_characters_long}
     depends_on:
       - api
 
